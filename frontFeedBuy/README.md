@@ -1,2 +1,0 @@
-# frontFeedBuy
-Front Feed Buy
