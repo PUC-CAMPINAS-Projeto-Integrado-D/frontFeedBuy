@@ -21,7 +21,7 @@ import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 const Cadastro = () => {
     const [showPassword, setShowPassword] = useState(false);
     return (
-    <ChakraProvider>
+  <ChakraProvider>
         <Flex
       minH={'100vh'}
       align={'center'}
@@ -115,8 +115,8 @@ const Cadastro = () => {
         </Box>
       </Stack>
     </Flex>
-    </ChakraProvider>
-    );
+  </ChakraProvider>
+  );
 }
 
 export default Cadastro;

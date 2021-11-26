@@ -64,7 +64,7 @@ const Login = () => {
         </Box>
       </Stack>
     </Flex>
-        </ChakraProvider>  
+</ChakraProvider>  
     );
 };
 
