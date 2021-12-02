@@ -18,23 +18,25 @@ import {
 const Login = () => {
      return(
         <ChakraProvider>
-            <Flex
-      minH={'100vh'}
-      align={'center'}
-      justify={'center'}
-      bg={useColorModeValue('gray.50', 'gray.800')}>
-      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
-        <Stack align={'center'}>
-          <Heading>FeedBuy</Heading>
-          <Text fontSize={'lg'} color={'gray.600'}>
-            Faça seu login abaixo
-          </Text>
-        </Stack>
-        <Box
-          rounded={'lg'}
-          bg={useColorModeValue('white', 'gray.700')}
-          boxShadow={'lg'}
-          p={8}>
+          <Flex
+            minH={'100vh'}
+            align={'center'}
+            justify={'center'}
+            bg={useColorModeValue('gray.50', 'gray.800')}
+          >
+
+        <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+          <Stack align={'center'}>
+            <Heading>Seja bem-vindo(a)</Heading>
+            <Text fontSize={'lg'} color={'gray.600'}>
+              faça seu login abaixo
+            </Text>
+          </Stack>
+          <Box
+            rounded={'lg'}
+            bg={useColorModeValue('white', 'gray.700')}
+            boxShadow={'lg'}
+            p={8}>
           <Stack spacing={4}>
             <FormControl id="email">
               <FormLabel>Email ou Username</FormLabel>
@@ -49,13 +51,14 @@ const Login = () => {
                 direction={{ base: 'column', sm: 'row' }}
                 align={'start'}
                 justify={'space-between'}>
-                <Checkbox>Salvar Login</Checkbox>
+                <Checkbox>Continuar conectado</Checkbox>
               </Stack>
               <Button
-                bg={'black'}
+                bgGradient="linear(to-r, red.400,pink.400)"
                 color={'white'}
                 _hover={{
-                  bg: 'gray.700',
+                  bgGradient: 'linear(to-r, red.400,pink.400)',
+                  boxShadow: 'xl',
                 }}>
                 Entrar
               </Button>

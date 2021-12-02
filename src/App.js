@@ -7,6 +7,7 @@
 import CadastroProduto from '../src/Pages/CadastroProduto/CadastroProduto';
 
 function App() {
+  
   return (
   <CadastroProduto/>
   );

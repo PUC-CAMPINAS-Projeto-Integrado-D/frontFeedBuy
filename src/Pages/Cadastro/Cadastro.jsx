@@ -1,20 +1,23 @@
 import {
-    Flex,
-    Box,
-    FormControl,
-    FormLabel,
-    Input,
-    InputGroup,
-    HStack,
-    InputRightElement,
-    Stack,
-    Button,
-    Heading,
-    Text,
-    useColorModeValue,
-    Link,
-    ChakraProvider,
-  } from '@chakra-ui/react';
+  Flex,
+  Box,
+  FormControl,
+  FormLabel,
+  Input,
+  InputGroup,
+  HStack,
+  InputRightElement,
+  Stack,
+  Button,
+  Heading,
+  Text,
+  useColorModeValue,
+  Link,
+  ChakraProvider,
+  RadioGroup,
+  Radio,
+} from '@chakra-ui/react';
+
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
   
@@ -23,17 +26,17 @@ const Cadastro = () => {
     return (
   <ChakraProvider>
         <Flex
-      minH={'100vh'}
-      align={'center'}
-      justify={'center'}
-      bg={useColorModeValue('gray.50', 'gray.800')}>
+          minH={'100vh'}
+          align={'center'}
+          justify={'center'}
+          bg={useColorModeValue('gray.50', 'gray.800')}>
       <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
         <Stack align={'center'}>
           <Heading fontSize={'4xl'} textAlign={'center'}>
-            FeedBuy
+            Seja bem-vindo(a)
           </Heading>
           <Text fontSize={'lg'} color={'gray.600'}>
-            Faça seu Registro abaixo
+            faça seu cadastro para aproveitar tudo!
           </Text>
         </Stack>
         <Box
@@ -63,6 +66,22 @@ const Cadastro = () => {
                 </FormControl>        
             </Box>
             <Box>
+                <FormControl id="email" isRequired>
+                  <FormLabel>Email</FormLabel>
+                  <Input type="email" />
+                </FormControl>
+            </Box>
+            <Box>
+              <FormControl>
+                <FormLabel as="legend">Selecione o tipo de usuario:</FormLabel>
+                <RadioGroup>
+                  <Radio value="comprador">Comprador</Radio>
+                    <br></br>
+                  <Radio value="vendedor">Vendedor</Radio>
+                </RadioGroup>
+              </FormControl>
+            </Box>
+            <Box>
                 <FormControl id="documento" isRequired> 
                     <FormLabel>Documento</FormLabel>
                     <Input type="text"/>
@@ -80,10 +99,7 @@ const Cadastro = () => {
                     <Input type="tel"/>
                 </FormControl>
             </Box>
-            <FormControl id="email" isRequired>
-              <FormLabel>Email</FormLabel>
-              <Input type="email" />
-            </FormControl>
+            
             <FormControl id="password" isRequired>
               <FormLabel>Senha</FormLabel>
               <InputGroup>
@@ -101,16 +117,26 @@ const Cadastro = () => {
             </FormControl>
             <Stack spacing={10} pt={2}>
               <Button
-                loadingText="Submitting"
-                size="lg"
-                bg={'black'}
+                loadingText="Criando conta..."
+                fontFamily={'heading'}
+                mt={8}
+                w={'full'}
+                bgGradient="linear(to-r, red.400,pink.400)"
                 color={'white'}
                 _hover={{
-                  bg: 'gray.700',
+                  bgGradient: 'linear(to-r, red.400,pink.400)',
+                  boxShadow: 'xl',
                 }}>
-                Registrar
+                Criar conta
               </Button>
             </Stack>
+
+            <Stack pt={6}>
+              <Text align={'center'}>
+                Já é usuário? <Link color={'pink.400'}>Conecte-se</Link>
+              </Text>
+            </Stack>
+
           </Stack>
         </Box>
       </Stack>
