@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React from 'react';
 import { ChakraProvider } from '@chakra-ui/react';
 import {
     Flex,
@@ -15,7 +15,29 @@ import {
     useColorModeValue,
   } from '@chakra-ui/react';
 
+  import { useState } from 'react';
+  import { axiosPost } from '../../Service/service';
+
 const Login = () => {
+    const [Email, setEmail] = useState('');
+    const [Senha, setSenha] = useState('');
+
+    const link = 'http://localhost:3000/v1/public/login';
+    const clicked = async ()=>{
+        try{
+            const resposta = await axiosPost(
+                link, // Colocar o link aqui
+                {
+                    Email,
+                    Senha,
+                }
+            );
+            console.log(resposta);
+        }catch(ex){
+            console.error(ex);
+        }
+    }
+
      return(
         <ChakraProvider>
           <Flex
@@ -40,11 +62,11 @@ const Login = () => {
           <Stack spacing={4}>
             <FormControl id="email">
               <FormLabel>Email ou Username</FormLabel>
-              <Input type="email" />
+              <Input value={Email} onInput={e => setEmail(e.target.value)} type="email" />
             </FormControl>
             <FormControl id="password">
               <FormLabel>Senha</FormLabel>
-              <Input type="password" />
+              <Input value={Senha} onInput={e => setSenha(e.target.value)} type="password" />
             </FormControl>
             <Stack spacing={10}>
               <Stack
@@ -54,6 +76,7 @@ const Login = () => {
                 <Checkbox>Continuar conectado</Checkbox>
               </Stack>
               <Button
+                onClick={clicked}
                 bgGradient="linear(to-r, red.400,pink.400)"
                 color={'white'}
                 _hover={{
@@ -67,7 +90,7 @@ const Login = () => {
         </Box>
       </Stack>
     </Flex>
-</ChakraProvider>  
+</ChakraProvider>
     );
 };
 

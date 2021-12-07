@@ -18,8 +18,32 @@ import {
   } from '@chakra-ui/react';
 import { SmallCloseIcon } from '@chakra-ui/icons';
 
-  
+import { useState } from 'react';
+import { axiosPost } from '../../Service/service';
+
 const CadastroProduto = () => {
+
+    const [Marca, setMarca] = useState('');
+    const [Preco, setPreco] = useState('');
+    const [Descricao, setDescricao] = useState('');
+
+    const link = 'http://localhost:3000/v1/public/login';
+    const clicked = async ()=>{
+        try{
+            const resposta = await axiosPost(
+                link, // Colocar o link aqui
+                {
+                    Marca,
+                    Preco,
+                    Descricao,
+                }
+            );
+            console.log(resposta);
+        }catch(ex){
+            console.error(ex);
+        }
+    }
+
     return(
         <ChakraProvider>
              <Flex
@@ -44,15 +68,6 @@ const CadastroProduto = () => {
           <Stack direction={['column', 'row']} spacing={6}>
             <Center>
               <Avatar size="xl" src="">
-                <AvatarBadge
-                  as={IconButton}
-                  size="sm"
-                  rounded="full"
-                  top="-10px"
-                  colorScheme="red"
-                  aria-label="remove Image"
-                  icon={<SmallCloseIcon />}
-                />
               </Avatar>
             </Center>
             <Center w="full">
@@ -60,27 +75,17 @@ const CadastroProduto = () => {
             </Center>
           </Stack>
         </FormControl>
-        <FormControl id="productName" isRequired>
-          <FormLabel>Nome do Produto</FormLabel>
-          <Input
-            type="text"
-          />
-        </FormControl>
         <FormControl>
             <FormLabel>Marca do Produto</FormLabel>
-            <Input type="text"/>    
+            <Input value={Marca} onInput={e => setMarca(e.target.value)} type="text"/>
         </FormControl>
         <FormControl>
             <FormLabel>Preço</FormLabel>
-            <Input type="number"/>
-        </FormControl>
-        <FormControl>
-            <FormLabel>Quantidade</FormLabel>
-            <Input type="number"/>
+            <Input value={Preco} onInput={e => setPreco(e.target.value)} type="number"/>
         </FormControl>
         <FormControl>
             <FormLabel>Descrição</FormLabel>
-            <Textarea/>
+            <Textarea value={Descricao} onInput={e => setDescricao(e.target.value)} />
         </FormControl>
         <Stack spacing={6} direction={['column', 'row']}>
           <Button
@@ -93,6 +98,7 @@ const CadastroProduto = () => {
             Cancelar
           </Button>
           <Button
+            onClick={clicked}
             bg={'Black'}
             color={'white'}
             w="full"
