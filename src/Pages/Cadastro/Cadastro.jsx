@@ -18,11 +18,11 @@ import {
   Radio,
 } from '@chakra-ui/react';
 
-
-
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { axiosPost } from '../../Service/service';
+import Header from '../../Components/Header';
+import Footer from '../../Components/Footer';
 
 const Cadastro = () => {
     const [showPassword, setShowPassword] = useState(false);
@@ -55,12 +55,15 @@ const Cadastro = () => {
     }
     return (
   <ChakraProvider>
+
+    <Header/>
+
         <Flex
           minH={'100vh'}
           align={'center'}
           justify={'center'}
           bg={useColorModeValue('gray.50', 'gray.800')}>
-      <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+      <Stack spacing={8} mx={'auto'} width={'700px'} py={12} px={6}>
         <Stack align={'center'}>
           <Heading fontSize={'4xl'} textAlign={'center'}>
             Seja bem-vindo(a)
@@ -148,6 +151,8 @@ const Cadastro = () => {
         </Box>
       </Stack>
     </Flex>
+
+    <Footer/>
   </ChakraProvider>
   );
 }
