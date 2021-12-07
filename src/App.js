@@ -10,8 +10,15 @@ import Feed from '../src/Pages/Feed/Feed';
 function App() {
 
   return (
+<<<<<<< Updated upstream
   <Feed/>
+=======
+    <Login/>
+>>>>>>> Stashed changes
   );
 }
 
 export default App;
+
+
+

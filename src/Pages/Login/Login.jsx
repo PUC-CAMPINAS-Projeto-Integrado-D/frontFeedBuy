@@ -14,6 +14,8 @@ import {
     Text,
     useColorModeValue,
   } from '@chakra-ui/react';
+import Header from '../../Components/Header';
+import Footer from '../../Components/Footer';
 
   import { useState } from 'react';
   import { axiosPost } from '../../Service/service';
@@ -40,14 +42,16 @@ const Login = () => {
 
      return(
         <ChakraProvider>
+
+          <Header/>
           <Flex
-            minH={'100vh'}
+            minH={'65vh'}
             align={'center'}
             justify={'center'}
             bg={useColorModeValue('gray.50', 'gray.800')}
           >
 
-        <Stack spacing={8} mx={'auto'} maxW={'lg'} py={12} px={6}>
+        <Stack spacing={8} mx={'auto'} width={'500px'} py={12} px={6}>
           <Stack align={'center'}>
             <Heading>Seja bem-vindo(a)</Heading>
             <Text fontSize={'lg'} color={'gray.600'}>
@@ -74,7 +78,9 @@ const Login = () => {
                 align={'start'}
                 justify={'space-between'}>
                 <Checkbox>Continuar conectado</Checkbox>
+                <Link color={'blue.400'}>Esqueceu a senha?</Link>
               </Stack>
+
               <Button
                 onClick={clicked}
                 bgGradient="linear(to-r, red.400,pink.400)"
@@ -90,7 +96,9 @@ const Login = () => {
         </Box>
       </Stack>
     </Flex>
-</ChakraProvider>
+
+    <Footer/>
+</ChakraProvider>  
     );
 };
 
