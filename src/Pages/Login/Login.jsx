@@ -19,19 +19,20 @@ import {
   import { axiosPost } from '../../Service/service';
 
 const Login = () => {
-    const [Email, setEmail] = useState('');
+    const [Usuario, setUsuario] = useState('');
     const [Senha, setSenha] = useState('');
 
-    const link = 'http://localhost:3000/v1/public/login';
+    const link = 'http://localhost:3001/v1/public/login';
     const clicked = async ()=>{
         try{
             const resposta = await axiosPost(
                 link, // Colocar o link aqui
                 {
-                    Email,
+                    Usuario,
                     Senha,
                 }
             );
+            localStorage.setItem('autentication', JSON.stringify(resposta));
             console.log(resposta);
         }catch(ex){
             console.error(ex);
@@ -62,7 +63,7 @@ const Login = () => {
           <Stack spacing={4}>
             <FormControl id="email">
               <FormLabel>Email ou Username</FormLabel>
-              <Input value={Email} onInput={e => setEmail(e.target.value)} type="email" />
+              <Input value={Usuario} onInput={e => setUsuario(e.target.value)} type="email" />
             </FormControl>
             <FormControl id="password">
               <FormLabel>Senha</FormLabel>

@@ -33,7 +33,7 @@ const Cadastro = () => {
     const [Documento, setDocumento] = useState('');
     const [Usuario, setUsuario] = useState('');
 
-    const link = 'http://localhost:3000/v1/public/register';
+    const link = 'http://localhost:3001/v1/public/register';
     const clicked = async ()=>{
         try{
             const resposta = await axiosPost(
@@ -48,6 +48,7 @@ const Cadastro = () => {
                 }
             );
             console.log(resposta);
+            localStorage.getItem('autentication', JSON.stringify(resposta));
         }catch(ex){
             console.error(ex);
         }

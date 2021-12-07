@@ -1,16 +1,18 @@
+import { AutoComplete } from 'antd';
+
 const axios = require('axios').default;
 
 export function axiosPost(url, params, bearer = null){
-    let config;
+    let Authorization;
     if(bearer != null){
-        config = {
-            headers: {
-                Authorization: `Bearer ${bearer}`
-            }
-        };
+        Authorization = `Bearer ${bearer}`;
     }
     return new Promise((resolve, reject) => {
-        axios.post(url, params, bearer)
+        axios.post(url, params, {
+            headers: {
+                Authorization 
+            }
+        })
         .then(function (response) {
             resolve(response)
         })

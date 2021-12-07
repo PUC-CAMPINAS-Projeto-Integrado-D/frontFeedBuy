@@ -27,7 +27,8 @@ const CadastroProduto = () => {
     const [Preco, setPreco] = useState('');
     const [Descricao, setDescricao] = useState('');
 
-    const link = 'http://localhost:3000/v1/public/login';
+    const link = 'http://localhost:3001/v1/private/ad';
+    const token = JSON.parse(localStorage.getItem('autentication')).data.data.token;
     const clicked = async ()=>{
         try{
             const resposta = await axiosPost(
@@ -37,8 +38,10 @@ const CadastroProduto = () => {
                     Preco,
                     Descricao,
                 }
+                , token
             );
             console.log(resposta);
+            localStorage.getItem('autentication');
         }catch(ex){
             console.error(ex);
         }
