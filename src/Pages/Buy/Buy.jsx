@@ -22,7 +22,7 @@ const Buy = () => {
                 <body className='bodyBuy'>
                     <Image
                         className='imageBuy'
-                        src={<ImgIphone/>}
+                        src={ImgIphone}
                     />
                     
                     <div className='aboutBuy'>

@@ -18,8 +18,6 @@ import {
   Radio,
 } from '@chakra-ui/react';
 
-
-
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { axiosPost } from '../../Service/service';
