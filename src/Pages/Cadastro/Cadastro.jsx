@@ -18,11 +18,40 @@ import {
   Radio,
 } from '@chakra-ui/react';
 
+
+
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
-  
+import { axiosPost } from '../../Service/service';
+
 const Cadastro = () => {
     const [showPassword, setShowPassword] = useState(false);
+    const [Nome, setNome] = useState('');
+    const [Email, setEmail] = useState('');
+    const [Senha, setSenha] = useState('');
+    const [Fone, setFone] = useState('');
+    const [Documento, setDocumento] = useState('');
+    const [Usuario, setUsuario] = useState('');
+
+    const link = 'http://localhost:3000/v1/public/register';
+    const clicked = async ()=>{
+        try{
+            const resposta = await axiosPost(
+                link, // Colocar o link aqui
+                {
+                    Nome,
+                    Email,
+                    Senha,
+                    Fone,
+                    Documento,
+                    Usuario
+                }
+            );
+            console.log(resposta);
+        }catch(ex){
+            console.error(ex);
+        }
+    }
     return (
   <ChakraProvider>
         <Flex
@@ -44,66 +73,42 @@ const Cadastro = () => {
           bg={useColorModeValue('white', 'gray.700')}
           boxShadow={'lg'}
           p={8}>
-          <Stack spacing={4}>
-            <HStack>
-              <Box>
-                <FormControl id="firstName" isRequired>
-                  <FormLabel>Nome</FormLabel>
-                  <Input type="text" />
-                </FormControl>
-              </Box>
-              <Box>
-                <FormControl id="lastName" isRequired>
-                  <FormLabel>Sobrenome</FormLabel>
-                  <Input type="text" />
-                </FormControl>
-              </Box>
-            </HStack>
+          <Stack spacing={6}>
+          <Box>
+            <FormControl id="firstName" isRequired>
+              <FormLabel>Nome</FormLabel>
+              <Input value={Nome} onInput={e => setNome(e.target.value)} type="text" />
+            </FormControl>
+          </Box>
             <Box>
                 <FormControl id="username" isRequired>
                     <FormLabel>Username</FormLabel>
-                    <Input type="text"/>    
-                </FormControl>        
+                    <Input value={Usuario} onInput={e => setUsuario(e.target.value)} type="text"/>
+                </FormControl>
             </Box>
             <Box>
                 <FormControl id="email" isRequired>
                   <FormLabel>Email</FormLabel>
-                  <Input type="email" />
+                  <Input value={Email} onInput={e => setEmail(e.target.value)} type="email" />
                 </FormControl>
             </Box>
             <Box>
-              <FormControl>
-                <FormLabel as="legend">Selecione o tipo de usuario:</FormLabel>
-                <RadioGroup>
-                  <Radio value="comprador">Comprador</Radio>
-                    <br></br>
-                  <Radio value="vendedor">Vendedor</Radio>
-                </RadioGroup>
-              </FormControl>
-            </Box>
-            <Box>
-                <FormControl id="documento" isRequired> 
+                <FormControl id="documento" isRequired>
                     <FormLabel>Documento</FormLabel>
-                    <Input type="text"/>
-                </FormControl>
-            </Box>
-            <Box>
-                <FormControl id="nascimento" isRequired>
-                    <FormLabel>Data de Nascimento</FormLabel>
-                    <Input type="Date"/>
+                    <Input value={Documento} onInput={e => setDocumento(e.target.value)} type="text"/>
                 </FormControl>
             </Box>
             <Box>
                 <FormControl id="telefone" isRequired>
                     <FormLabel>Telefone</FormLabel>
-                    <Input type="tel"/>
+                    <Input value={Fone} onInput={e => setFone(e.target.value)} type="tel"/>
                 </FormControl>
             </Box>
-            
+
             <FormControl id="password" isRequired>
               <FormLabel>Senha</FormLabel>
               <InputGroup>
-                <Input type={showPassword ? 'text' : 'password'} />
+                <Input value={Senha} onInput={e => setSenha(e.target.value)} type={showPassword ? 'text' : 'password'} />
                 <InputRightElement h={'full'}>
                   <Button
                     variant={'ghost'}
@@ -126,7 +131,8 @@ const Cadastro = () => {
                 _hover={{
                   bgGradient: 'linear(to-r, red.400,pink.400)',
                   boxShadow: 'xl',
-                }}>
+                }}
+                onClick={clicked}>
                 Criar conta
               </Button>
             </Stack>
