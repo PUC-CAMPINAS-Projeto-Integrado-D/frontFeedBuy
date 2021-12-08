@@ -17,7 +17,7 @@ import {
   RadioGroup,
   Radio,
 } from '@chakra-ui/react';
-
+import { useToast } from '@chakra-ui/react'
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
 import { axiosPost } from '../../Service/service';
@@ -34,6 +34,7 @@ const Cadastro = () => {
     const [Usuario, setUsuario] = useState('');
 
     const link = 'http://localhost:3001/v1/public/register';
+    const toast = useToast();
     const clicked = async ()=>{
         try{
             const resposta = await axiosPost(
@@ -47,10 +48,23 @@ const Cadastro = () => {
                     Usuario
                 }
             );
-            console.log(resposta);
+            toast({
+          title: 'Conta criada!!!',
+          status: 'success',
+          position: 'top-left',
+          duration: 9000,
+          isClosable: true,
+        })
             localStorage.getItem('autentication', JSON.stringify(resposta));
         }catch(ex){
-            console.error(ex);
+            toast({
+              title: 'Dados inválidos',
+              description: "Verifique as informações foram digitadas certas",
+              position: 'top-left',
+              status: 'error',
+              duration: 9000,
+              isClosable: true,
+            });
         }
     }
     return (
