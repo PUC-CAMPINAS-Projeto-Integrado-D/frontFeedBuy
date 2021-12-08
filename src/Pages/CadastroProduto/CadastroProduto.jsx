@@ -17,7 +17,7 @@ import {
     ChakraProvider,
   } from '@chakra-ui/react';
 import { SmallCloseIcon } from '@chakra-ui/icons';
-
+import { useToast } from '@chakra-ui/react'
 import { useState } from 'react';
 import { axiosPost } from '../../Service/service';
 import Header from '../../Components/Header';
@@ -42,10 +42,23 @@ const CadastroProduto = () => {
                 }
                 , token
             );
-            console.log(resposta);
+            toast({
+          title: 'Produto Adicionado!!!',
+          status: 'success',
+          position: 'top-left',
+          duration: 9000,
+          isClosable: true,
+        })
             localStorage.getItem('autentication');
         }catch(ex){
-            console.error(ex);
+          toast({
+            title: 'Erro',
+            description: "Verifique se as informações foram digitadas certas",
+            position: 'top-left',
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          });
         }
     }
 
