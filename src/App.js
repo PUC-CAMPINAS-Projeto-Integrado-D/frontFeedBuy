@@ -7,13 +7,14 @@ import { ChakraProvider } from '@chakra-ui/react'; // Precisa do ChakraProvider
 // import CadastroProduto from '../src/Pages/CadastroProduto/CadastroProduto';
 // import Feed from '../src/Pages/Feed/Feed';
 // import Pay from '../src/Pages/Pay/Pay'
-import CardProduct from '../src/Components/CardProduct/CardProduct:';
+// import CardProduct from '../src/Components/CardProduct/CardProduct:';
+import ViewProduct from '../src/Pages/ViewProduct/ViewProduct';
 
 function App() {
     // Precisa do ChakraProvider
     return (
         <ChakraProvider>
-            <CardProduct/>
+            <ViewProduct/>
         </ChakraProvider>
 
     );

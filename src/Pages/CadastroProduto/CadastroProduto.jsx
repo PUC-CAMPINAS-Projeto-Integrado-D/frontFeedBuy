@@ -31,6 +31,7 @@ const CadastroProduto = () => {
 
     const link = 'http://localhost:3001/v1/private/ad';
     const token = JSON.parse(localStorage.getItem('autentication')).data.data.token;
+    const toast = useToast();
     const clicked = async ()=>{
         try{
             const resposta = await axiosPost(
