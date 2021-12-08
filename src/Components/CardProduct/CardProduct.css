@@ -1,0 +1,17 @@
+.card-feed{
+    margin: 0;
+}
+
+@media (min-width: 576px) {
+    .card-feed{
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+@media (min-width: 768px) {
+    .card-feed{
+        width: 30%;
+        max-width: 30%;
+    }
+}

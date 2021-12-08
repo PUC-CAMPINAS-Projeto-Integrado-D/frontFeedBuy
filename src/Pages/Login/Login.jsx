@@ -37,7 +37,14 @@ const Login = () => {
                 }
             );
             localStorage.setItem('autentication', JSON.stringify(resposta));
-            console.log(resposta);
+            toast({
+              title: 'Acesso permitido',
+              description: "Entrando...",
+              position: 'top-left',
+              status: 'success',
+              duration: 9000,
+              isClosable: true,
+            });
         }catch(ex){
             toast({
               title: 'Dados inválidos',

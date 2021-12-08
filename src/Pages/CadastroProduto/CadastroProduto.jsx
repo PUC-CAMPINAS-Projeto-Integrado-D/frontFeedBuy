@@ -84,7 +84,7 @@ const CadastroProduto = () => {
                 </Stack>
               </FormControl>
               <FormControl>
-                  <FormLabel>Marca do Produto</FormLabel>
+                  <FormLabel>Título</FormLabel>
                   <Input value={Marca} onInput={e => setMarca(e.target.value)} type="text"/>
               </FormControl>
               <FormControl>

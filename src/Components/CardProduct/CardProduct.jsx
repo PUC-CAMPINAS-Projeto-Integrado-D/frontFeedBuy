@@ -11,16 +11,7 @@ import {
 } from '@chakra-ui/react';
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
 import { FiShoppingCart } from 'react-icons/fi';
-
-const data = {
-  isNew: true,
-  imageURL:
-    'https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=4600&q=80',
-  name: 'Wayfarer Classic',
-  price: 10, //valor
-  rating: 4.5, //estrelas
-  numReviews: 35, 
-};
+import './CardProduct.css';
 
 interface RatingProps {
   rating: number;
@@ -55,15 +46,31 @@ function Rating({ rating, numReviews }: RatingProps) {
   );
 }
 
-const CardProduct = () => {
+const CardProduct = ({
+  ID = null,
+  isNew = true,
+  imageURL = 'https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=4600&q=80',
+  name = 'Wayfarer Classic',
+  price = 10,
+  rating = 4.5,
+  numReviews = 35,
+}) => {
+    const data = {
+        isNew,
+        imageURL,
+        name,
+        price,
+        rating,
+        numReviews,
+    };
   return (
-    <Flex p={50} w="full" alignItems="center" justifyContent="center">
+    <Flex className = 'card-feed' display="inline-block" flex-grow={1} p={50} alignItems="center" justifyContent="center">
       <Box
         bg={useColorModeValue('white', 'gray.800')}
         maxW="sm"
         borderWidth="1px"
-        rounded="lg"
-        shadow="lg"
+        rounded="sm"
+        shadow="sm"
         position="relative">
         {data.isNew && (
           <Circle
@@ -78,16 +85,11 @@ const CardProduct = () => {
         <Image
           src={data.imageURL}
           alt={`Picture of ${data.name}`}
-          roundedTop="lg"
+          roundedTop="sm"
         />
 
         <Box p="6">
           <Box d="flex" alignItems="baseline">
-            {data.isNew && (
-              <Badge rounded="full" px="2" fontSize="0.8em" colorScheme="red">
-                Novo
-              </Badge>
-            )}
           </Box>
           <Flex mt="1" justifyContent="space-between" alignContent="center">
             <Box
@@ -111,10 +113,9 @@ const CardProduct = () => {
           </Flex>
 
           <Flex justifyContent="space-between" alignContent="center">
-            <Rating rating={data.rating} numReviews={data.numReviews} />
             <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
-              <Box as="span" color={'gray.600'} fontSize="lg">
-                £
+              <Box as="span" color={'gray.600'} fontSize="sm">
+                R$
               </Box>
               {data.price.toFixed(2)}
             </Box>
