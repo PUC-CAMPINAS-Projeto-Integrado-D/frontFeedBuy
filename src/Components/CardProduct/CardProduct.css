@@ -2,16 +2,23 @@
     margin: 0;
 }
 
-@media (min-width: 576px) {
+@media screen and (min-width: 576px) {
     .card-feed{
         width: 100%;
         max-width: 100%;
     }
 }
 
-@media (min-width: 768px) {
+@media screen and (min-width: 768px) {
     .card-feed{
         width: 30%;
         max-width: 30%;
+    }
+}
+
+@media screen and (max-width: 50vw) {
+    .card-feed{
+        width: 100%;
+        max-width: 100%;
     }
 }

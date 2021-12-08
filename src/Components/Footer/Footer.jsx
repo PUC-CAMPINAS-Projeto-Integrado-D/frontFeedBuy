@@ -16,7 +16,7 @@ import {
   import { FaInstagram, FaTwitter, FaYoutube } from 'react-icons/fa';
   import { BiMailSend } from 'react-icons/bi';
   import logo from '../../Images/FEEDBUY.png'
-  
+
   const SocialButton = ({
     children,
     label,
@@ -47,7 +47,7 @@ import {
       </chakra.button>
     );
   };
-  
+
   const ListHeader = ({ children }: { children: ReactNode }) => {
     return (
       <Text fontWeight={'500'} fontSize={'lg'} mb={2}>
@@ -55,7 +55,7 @@ import {
       </Text>
     );
   };
-  
+
   export default function LargeWithNewsletter() {
     return (
       <Box
@@ -70,7 +70,7 @@ import {
                 <Image src={logo}/>
               </Box>
               <Text fontSize={'sm'}>
-                © 2020 Chakra Templates. All rights reserved
+                © 2021 FeedBuy. All rights reserved
               </Text>
               <Stack direction={'row'} spacing={6}>
                 <SocialButton label={'Twitter'} href={'#'}>

@@ -53,7 +53,7 @@ const CardProduct = ({
   name = 'Wayfarer Classic',
   price = 10,
   rating = 4.5,
-  numReviews = 35,
+  numReviews = 35
 }) => {
     const data = {
         isNew,
