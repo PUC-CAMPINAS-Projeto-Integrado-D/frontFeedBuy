@@ -8,7 +8,7 @@ import { ChakraProvider } from '@chakra-ui/react'; // Precisa do ChakraProvider
 //import Feed from './Pages/Feed/Feed';
 // import Pay from '../src/Pages/Pay/Pay'
 // import CardProduct from '../src/Components/CardProduct/CardProduct:';
-import ViewProduct from '../src/Pages/ViewProduct/ViewProduct';
+// import ViewProduct from '../src/Pages/ViewProduct/ViewProduct';
 // import MetaTags from 'react-meta-tags';
 
 import Navegation from "./Navegation/Navegation";

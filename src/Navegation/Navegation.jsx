@@ -8,6 +8,7 @@ import CadastroProduto from '../Pages/CadastroProduto';
 import Feed from '../Pages/Feed';
 import Login from '../Pages/Login';
 import Perfil from '../Pages/Perfil';
+import ViewProduct from '../Pages/ViewProduct/ViewProduct';
 
 const Navegation = () => {
 
@@ -54,10 +55,16 @@ const Navegation = () => {
                     element = {<Perfil/>}
                 />
 
+                <Route
+                    exact={true}
+                    path='/ViewProduct'
+                    element = {<ViewProduct/>}
+                />
+
                 </Routes>
 
         </Router>
 
     );
 }
-export default Navegation; 
+export default Navegation;

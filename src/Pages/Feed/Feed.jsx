@@ -37,7 +37,7 @@ const Feed = () => {
                 <div className = 'cardproduct-feed'>
                     {data.map((value)=>{
                         console.log(value);
-                        return <CardProduct name={value.Descricao} imageURL={'http://localhost:3001/v1/public/media/'+value.ID} price={value.preco} ID={value.ID}/>;
+                        return <CardProduct name={value.Descricao} imageURL={'http://localhost:3001/v1/public/media/'+value.ID} price={value.Preco} ID={value.ID}/>;
                     })}
 
                 </div>

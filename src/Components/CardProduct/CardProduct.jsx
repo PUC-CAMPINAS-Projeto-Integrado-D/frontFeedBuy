@@ -54,6 +54,7 @@ function Rating({ rating, numReviews }: RatingProps) {
   );
 }
 
+
 const CardProduct = ({
   ID = null,
   isNew = true,
@@ -61,7 +62,8 @@ const CardProduct = ({
   name = 'Wayfarer Classic',
   price = 10,
   rating = 4.5,
-  numReviews = 35
+  numReviews = 35,
+  description = ''
 }) => {
     const data = {
         isNew,
@@ -70,7 +72,17 @@ const CardProduct = ({
         price,
         rating,
         numReviews,
+        description,
     };
+
+    function AddToCart(){
+        var Produto = data;
+        const cart = localStorage.getItem('cart') ?? '[]';
+        const cartFormated = JSON.parse(cart);
+        cartFormated.push(Produto);
+        localStorage.setItem('cart', JSON.stringify(cartFormated));
+    }
+
   return (
     <Flex className = 'card-feed' display="inline-block" flex-grow={1} p={50} alignItems="center" justifyContent="center">
       <Box
@@ -115,7 +127,7 @@ const CardProduct = ({
               color={'gray.800'}
               fontSize={'1.2em'}>
               <chakra.a href={'#'} display={'flex'}>
-                <Icon as={FiShoppingCart} h={7} w={7} alignSelf={'center'} />
+                <Icon as={FiShoppingCart} h={7} w={7} alignSelf={'center'} onClick= {()=>{AddToCart()}}/>
               </chakra.a>
             </Tooltip>
           </Flex>
@@ -125,7 +137,7 @@ const CardProduct = ({
               <Box as="span" color={'gray.600'} fontSize="lg">
                 R$
               </Box>
-              {data.valor}
+              {data.price.toFixed(2)}
             </Box>
           </Flex>
         </Box>
