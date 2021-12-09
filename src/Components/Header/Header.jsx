@@ -7,13 +7,11 @@ import {
   Stack,
   Collapse,
   Icon,
-  Image,
   Link,
   Popover,
   PopoverTrigger,
   PopoverContent,
   useColorModeValue,
-  useBreakpointValue,
   useDisclosure,
 } from '@chakra-ui/react';
 import {
@@ -23,9 +21,8 @@ import {
   ChevronRightIcon,
 } from '@chakra-ui/icons';
 
-import logo from '../../Images/FEEDBUY.png';
-import Login from '../../Pages/Login/Login';
-import Cadastro from '../../Pages/Cadastro/Cadastro';
+import '../../Navegation/Navegation';
+import {Link as LinkNav} from 'react-router-dom';
 
 export default function Header() {
   const { isOpen, onToggle } = useDisclosure();
@@ -72,21 +69,24 @@ export default function Header() {
           justify={'flex-end'}
           direction={'row'}
           spacing={6}>
-          <Button
-            as={'a'}
-            fontSize={'sm'}
-            fontWeight={400}
-            variant={'link'}
-            href={<Login/>}>
-            Entrar
-          </Button>
+
+          <LinkNav to="/Login">
+            <Button
+              as={'a'}
+              fontSize={'sm'}
+              fontWeight={400}
+              variant={'link'}
+              >
+              Entrar
+            </Button>
+          </LinkNav>
+
           <Button
             display={{ base: 'none', md: 'inline-flex' }}
             fontSize={'sm'}
             fontWeight={600}
             color={'white'}
             bg={'pink.400'}
-            href={<Cadastro/>}
             _hover={{
               bg: 'pink.300',
             }}>

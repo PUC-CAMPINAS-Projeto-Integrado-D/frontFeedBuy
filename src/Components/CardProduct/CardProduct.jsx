@@ -11,14 +11,13 @@ import {
 } from '@chakra-ui/react';
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
 import { FiShoppingCart } from 'react-icons/fi';
+import ImgIphone from '../../Images/iphone-13-pro-max-silver-select.jpeg';
 
 const data = {
   isNew: true,
-  imageURL:
-    'https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=4600&q=80',
-  name: 'Wayfarer Classic',
-  price: 10, //valor
-  rating: 4.5, //estrelas
+  name: 'Iphone 13 - Pro-Max',
+  valor: 7000, //valor
+  rating: 5, //estrelas
   numReviews: 35, 
 };
 
@@ -76,7 +75,7 @@ const CardProduct = () => {
         )}
 
         <Image
-          src={data.imageURL}
+          src={ImgIphone}
           alt={`Picture of ${data.name}`}
           roundedTop="lg"
         />
@@ -114,9 +113,9 @@ const CardProduct = () => {
             <Rating rating={data.rating} numReviews={data.numReviews} />
             <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
               <Box as="span" color={'gray.600'} fontSize="lg">
-                £
+                R$
               </Box>
-              {data.price.toFixed(2)}
+              {data.valor}
             </Box>
           </Flex>
         </Box>
