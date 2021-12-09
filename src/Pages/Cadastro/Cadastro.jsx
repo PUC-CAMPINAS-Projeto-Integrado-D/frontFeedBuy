@@ -56,6 +56,11 @@ const Cadastro = () => {
           isClosable: true,
         })
             localStorage.getItem('autentication', JSON.stringify(resposta));
+
+            setTimeout(()=>{
+                window.location.href = '../';
+            }, 900);
+
         }catch(ex){
             toast({
               title: 'Dados inválidos',
@@ -157,7 +162,11 @@ const Cadastro = () => {
 
             <Stack pt={6}>
               <Text align={'center'}>
-                Já é usuário? <Link color={'pink.400'}>Conecte-se</Link>
+                Já é usuário? <Link color={'pink.400'} onClick={()=>{
+                    setTimeout(()=>{
+                        window.location.href = '../Login';
+                    }, 900);
+                }}>Conecte-se</Link>
               </Text>
             </Stack>
 

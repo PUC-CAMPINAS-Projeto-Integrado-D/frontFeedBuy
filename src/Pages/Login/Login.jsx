@@ -45,6 +45,9 @@ const Login = () => {
               duration: 9000,
               isClosable: true,
             });
+            setTimeout(()=>{
+                window.location.href = '../';
+            }, 900);
         }catch(ex){
             toast({
               title: 'Dados inválidos',
