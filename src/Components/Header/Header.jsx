@@ -7,13 +7,11 @@ import {
   Stack,
   Collapse,
   Icon,
-  Image,
   Link,
   Popover,
   PopoverTrigger,
   PopoverContent,
   useColorModeValue,
-  useBreakpointValue,
   useDisclosure,
 } from '@chakra-ui/react';
 import {
@@ -23,9 +21,8 @@ import {
   ChevronRightIcon,
 } from '@chakra-ui/icons';
 
-import logo from '../../Images/FEEDBUY.png';
-import Login from '../../Pages/Login/Login';
-import Cadastro from '../../Pages/Cadastro/Cadastro';
+import '../../Navegation/Navegation';
+import {Link as LinkNav} from 'react-router-dom';
 
 export default function Header() {
   const { isOpen, onToggle } = useDisclosure();
@@ -58,7 +55,11 @@ export default function Header() {
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
 
           <Flex display={{base: 'none', md: 'flex'}} ml={0}>
-            <Button variant="ghost">feedbuy</Button>
+
+            <LinkNav to='/Feed'>
+              <Button variant="ghost">feedbuy</Button>
+            </LinkNav>
+
           </Flex>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
@@ -72,26 +73,32 @@ export default function Header() {
           justify={'flex-end'}
           direction={'row'}
           spacing={6}>
-          <Button
-            as={'a'}
-            fontSize={'sm'}
-            fontWeight={400}
-            variant={'link'}
-            href={<Login/>}>
-            Entrar
-          </Button>
-          <Button
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize={'sm'}
-            fontWeight={600}
-            color={'white'}
-            bg={'pink.400'}
-            href={<Cadastro/>}
-            _hover={{
-              bg: 'pink.300',
-            }}>
-            Cadastrar
-          </Button>
+
+          <LinkNav to="/Login">
+            <Button
+              as={'a'}
+              fontSize={'sm'}
+              fontWeight={400}
+              variant={'link'}
+              >
+              Entrar
+            </Button>
+          </LinkNav>
+
+          <LinkNav to="/Cadastro">
+            <Button
+              display={{ base: 'none', md: 'inline-flex' }}
+              fontSize={'sm'}
+              fontWeight={600}
+              color={'white'}
+              bg={'pink.400'}
+              _hover={{
+                bg: 'pink.300',
+              }}>
+              Cadastrar
+            </Button>
+          </LinkNav>
+
         </Stack>
       </Flex>
 
@@ -260,10 +267,6 @@ const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: 'Meu carrinho',
-    href: '#',
-  },
-  {
-    label: '',
-    href: '#',
+    href: '/Buy',
   },
 ];

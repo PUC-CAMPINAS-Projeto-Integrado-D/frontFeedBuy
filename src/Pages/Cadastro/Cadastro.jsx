@@ -59,7 +59,7 @@ const Cadastro = () => {
         }catch(ex){
             toast({
               title: 'Dados inválidos',
-              description: "Verifique as informações foram digitadas certas",
+              description: "Verifique se as informações foram digitadas certas",
               position: 'top-left',
               status: 'error',
               duration: 9000,

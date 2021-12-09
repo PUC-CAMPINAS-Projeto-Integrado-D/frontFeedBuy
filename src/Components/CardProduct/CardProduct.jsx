@@ -11,7 +11,15 @@ import {
 } from '@chakra-ui/react';
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
 import { FiShoppingCart } from 'react-icons/fi';
-import './CardProduct.css';
+import ImgIphone from '../../Images/iphone-13-pro-max-silver-select.jpeg';
+
+const data = {
+  isNew: true,
+  name: 'Iphone 13 - Pro-Max',
+  valor: 7000, //valor
+  rating: 5, //estrelas
+  numReviews: 35,
+};
 
 interface RatingProps {
   rating: number;
@@ -83,7 +91,7 @@ const CardProduct = ({
         )}
 
         <Image
-          src={data.imageURL}
+          src={ImgIphone}
           alt={`Picture of ${data.name}`}
           roundedTop="sm"
         />
@@ -114,10 +122,10 @@ const CardProduct = ({
 
           <Flex justifyContent="space-between" alignContent="center">
             <Box fontSize="2xl" color={useColorModeValue('gray.800', 'white')}>
-              <Box as="span" color={'gray.600'} fontSize="sm">
+              <Box as="span" color={'gray.600'} fontSize="lg">
                 R$
               </Box>
-              {data.price.toFixed(2)}
+              {data.valor}
             </Box>
           </Flex>
         </Box>

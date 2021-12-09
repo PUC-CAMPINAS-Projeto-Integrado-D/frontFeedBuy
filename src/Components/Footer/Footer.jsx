@@ -107,10 +107,10 @@ import {
                   }}
                 />
                 <IconButton
-                  bg={useColorModeValue('black.400', 'green.800')}
+                  bgGradient="linear(to-r, red.400,pink.400)"
                   color={useColorModeValue('white', 'gray.800')}
                   _hover={{
-                    bg: 'green.600',
+                    bgGradient: 'linear(to-r, red.400,pink.400)',
                   }}
                   aria-label="Inscrever-se"
                   icon={<BiMailSend />}
