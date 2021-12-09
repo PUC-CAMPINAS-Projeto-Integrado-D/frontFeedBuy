@@ -14,14 +14,9 @@ const Navegation = () => {
     return (
 
         <Router>
-
-            <Fragment>
-                <Feed/>
-            </Fragment>
-
-
-            
                 <Routes>
+
+                <Route exact={true} path='/' element={<Feed/>}/>
 
                 <Route
                     exact={true}
@@ -60,6 +55,7 @@ const Navegation = () => {
                 />
 
                 </Routes>
+
         </Router>
 
     );

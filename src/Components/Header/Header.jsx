@@ -55,7 +55,11 @@ export default function Header() {
         <Flex flex={{ base: 1 }} justify={{ base: 'center', md: 'start' }}>
 
           <Flex display={{base: 'none', md: 'flex'}} ml={0}>
-            <Button variant="ghost">feedbuy</Button>
+
+            <LinkNav to='/Feed'>
+              <Button variant="ghost">feedbuy</Button>
+            </LinkNav>
+
           </Flex>
 
           <Flex display={{ base: 'none', md: 'flex' }} ml={10}>
@@ -81,17 +85,20 @@ export default function Header() {
             </Button>
           </LinkNav>
 
-          <Button
-            display={{ base: 'none', md: 'inline-flex' }}
-            fontSize={'sm'}
-            fontWeight={600}
-            color={'white'}
-            bg={'pink.400'}
-            _hover={{
-              bg: 'pink.300',
-            }}>
-            Cadastrar
-          </Button>
+          <LinkNav to="/Cadastro">
+            <Button
+              display={{ base: 'none', md: 'inline-flex' }}
+              fontSize={'sm'}
+              fontWeight={600}
+              color={'white'}
+              bg={'pink.400'}
+              _hover={{
+                bg: 'pink.300',
+              }}>
+              Cadastrar
+            </Button>
+          </LinkNav>
+
         </Stack>
       </Flex>
 
@@ -260,10 +267,6 @@ const NAV_ITEMS: Array<NavItem> = [
   },
   {
     label: 'Meu carrinho',
-    href: '#',
-  },
-  {
-    label: '',
-    href: '#',
+    href: '/Buy',
   },
 ];
