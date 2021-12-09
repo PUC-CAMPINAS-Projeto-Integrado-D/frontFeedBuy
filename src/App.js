@@ -14,7 +14,6 @@ import { ChakraProvider } from '@chakra-ui/react'; // Precisa do ChakraProvider
 import Navegation from "./Navegation/Navegation";
 
 
-
 function App() {
     // Precisa do ChakraProvider
     return (
