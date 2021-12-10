@@ -25,8 +25,8 @@ import '../../Navegation/Navegation';
 import {Link as LinkNav} from 'react-router-dom';
 
 export default function Header() {
-  const { isOpen, onToggle } = useDisclosure();
-
+const { isOpen, onToggle } = useDisclosure();
+const autentication = JSON.parse(localStorage.getItem('autentication'))?.data?.data;
   return (
     <Box>
       <Flex
@@ -73,7 +73,8 @@ export default function Header() {
           justify={'flex-end'}
           direction={'row'}
           spacing={6}>
-          <LinkNav to="/Login">
+          {autentication== null && <LinkNav to="/Login">
+
             <Button
               as={'a'}
               fontSize={'sm'}
@@ -82,9 +83,10 @@ export default function Header() {
               >
               Entrar
             </Button>
-          </LinkNav>
+          </LinkNav>}
 
-          <LinkNav to="/Cadastro">
+
+          {autentication==null &&<LinkNav to="/Cadastro">
             <Button
               display={{ base: 'none', md: 'inline-flex' }}
               fontSize={'sm'}
@@ -96,7 +98,21 @@ export default function Header() {
               }}>
               Cadastrar
             </Button>
-          </LinkNav>
+          </LinkNav>}
+
+          {autentication!=null &&
+            <Button
+              onClick={() => {
+                localStorage.setItem('autentication', null);
+                window.location.reload();
+              }}
+              display={{ base: 'none', md: 'inline-flex' }}
+              fontSize={'sm'}
+              fontWeight={400}
+              >
+              Sair
+            </Button>
+          }
 
         </Stack>
       </Flex>
