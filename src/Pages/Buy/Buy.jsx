@@ -1,4 +1,4 @@
-import React from 'react'; 
+import React from 'react';
 import { ChakraProvider, Divider, Image, Button, Select } from '@chakra-ui/react';
 
 import {BsBag} from 'react-icons/bs';
@@ -7,7 +7,7 @@ import {FaRegHeart} from 'react-icons/fa';
 
 import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
-import ImgIphone from '../../Images/iphone-13-pro-max-silver-select.jpeg';
+import { useToast } from '@chakra-ui/react';
 
 import {
     Accordion,
@@ -21,10 +21,30 @@ import {
 import './Buy.css';
 
 const Buy = () => {
+    const toast = useToast();
+    const thisProduct = JSON.parse(sessionStorage.getItem('buy'));
+    const ImgIphone = thisProduct.imageURL;
+
+    function AddToCart(){
+        var Produto = JSON.parse(sessionStorage.getItem('buy'));
+        const cart = localStorage.getItem('cart') ?? '[]';
+        const cartFormated = JSON.parse(cart);
+        cartFormated.push(Produto);
+        localStorage.setItem('cart', JSON.stringify(cartFormated));
+
+        toast({
+            title: 'Produto Adicionado ao carrinho!!!',
+            status: 'success',
+            position: 'top-left',
+            duration: 9000,
+            isClosable: true,
+        });
+    }
+
     return (
         <>
             <ChakraProvider>
-                <header> 
+                <header>
                     <Header/>
                 </header>
 
@@ -33,12 +53,11 @@ const Buy = () => {
                         className='imageBuy'
                         src={ImgIphone}
                     />
-                    
+
                     <div className='aboutBuy'>
-                        <h1>Apple </h1>
-                        <h3>Iphone 13 - Pro-Max Silver 128 GB</h3>
-                        <h3>R$ 7.000,00</h3>
-                        <h4>10x de 700,00</h4>
+                        <h1>{thisProduct.name}</h1>
+                        <h3>R$ {thisProduct.price.toFixed(2)}</h3>
+                        <h4>10x de {(thisProduct.price / 10).toFixed(2)}</h4>
 
                         <Accordion defaultIndex={[0]} allowMultiple>
                             <AccordionItem>
@@ -51,19 +70,14 @@ const Buy = () => {
                                 </AccordionButton>
                                 </h2>
                                 <AccordionPanel pb={2}>
-                                descricao bla bla bla 
+                                {thisProduct.description}
                                 </AccordionPanel>
                             </AccordionItem>
                         </Accordion>
 
                         <br></br>
 
-                        <Button className='btnBuy' rightIcon={<BsBag/>} colorScheme="black" variant="outline"> BUY NOW </Button>
-                    
-                        <div className='btnQCF'>
-                            <Button className="btnChat" rightIcon={<BsChatSquare size={'20px'}/>}/>
-                            <Button className="btnFavorito" rightIcon={<FaRegHeart size={'20px'}/>}/>
-                        </div>
+                        <Button className='btnBuy' onClick={AddToCart} rightIcon={<BsBag/>} colorScheme="black" variant="outline"> COMPRAR AGORA </Button>
 
                     </div>
 

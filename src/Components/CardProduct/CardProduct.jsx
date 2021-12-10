@@ -12,6 +12,7 @@ import {
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
 import { FiShoppingCart } from 'react-icons/fi';
 import ImgIphone from '../../Images/iphone-13-pro-max-silver-select.jpeg';
+import { useToast } from '@chakra-ui/react';
 
 const data = {
   isNew: true,
@@ -74,13 +75,26 @@ const CardProduct = ({
         numReviews,
         description,
     };
-
+    const toast = useToast();
     function AddToCart(){
         var Produto = data;
         const cart = localStorage.getItem('cart') ?? '[]';
         const cartFormated = JSON.parse(cart);
         cartFormated.push(Produto);
         localStorage.setItem('cart', JSON.stringify(cartFormated));
+
+        toast({
+            title: 'Produto Adicionado ao carrinho!!!',
+            status: 'success',
+            position: 'top-left',
+            duration: 9000,
+            isClosable: true,
+        });
+    }
+    function setBuy(){
+        var Produto = data;
+        sessionStorage.setItem('buy', JSON.stringify(Produto));
+        window.location.href='./Buy';
     }
 
   return (
@@ -101,13 +115,12 @@ const CardProduct = ({
             bg="red.200"
           />
         )}
-
-        <Image
-          src={imageURL}
-          alt={`Picture of ${data.name}`}
-          roundedTop="sm"
-        />
-
+            <Image
+              src={imageURL}
+              alt={`Picture of ${data.name}`}
+              roundedTop="sm"
+              onClick={setBuy}
+            />
         <Box p="6">
           <Box d="flex" alignItems="baseline">
           </Box>
@@ -117,6 +130,7 @@ const CardProduct = ({
               fontWeight="semibold"
               as="h4"
               lineHeight="tight"
+              onClick={setBuy}
               isTruncated>
               {data.name}
             </Box>
