@@ -73,7 +73,6 @@ export default function Header() {
           justify={'flex-end'}
           direction={'row'}
           spacing={6}>
-
           <LinkNav to="/Login">
             <Button
               as={'a'}
@@ -261,12 +260,19 @@ interface NavItem {
 }
 
 const NAV_ITEMS: Array<NavItem> = [
-  {
-    label: 'Favoritos',
-    href: '#',
-  },
+
   {
     label: 'Meu carrinho',
     href: '/Buy',
   },
+
 ];
+
+const token = JSON.parse(localStorage.getItem('autentication'))?.data?.data?.user?.Cargo ?? null;
+console.log(token, 'token');
+if(token!=null && token!=undefined && token==='ANUNCIANTE')
+NAV_ITEMS.push(
+  {
+    label: 'Cadastrar Produto',
+    href: '/CadastroProduto',
+  });
