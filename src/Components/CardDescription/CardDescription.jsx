@@ -11,7 +11,7 @@ import {
   Image
 } from '@chakra-ui/react';
 
-const Product = () => {
+const CardDescription = () => {
     return(
         <ChakraProvider>
         <Center py={6}>
@@ -37,6 +37,11 @@ const Product = () => {
                     layout={'fill'}
                 />
                 </Box>
+
+                <br></br>
+                <br></br>
+                <br></br>
+
                 <Stack>
                 <Text
                     color={'green.500'}
@@ -44,19 +49,16 @@ const Product = () => {
                     fontWeight={800}
                     fontSize={'sm'}
                     letterSpacing={1.1}>
-                    Blog
+                    preco
                 </Text>
                 <Heading
                     color={useColorModeValue('gray.700', 'white')}
                     fontSize={'2xl'}
                     fontFamily={'body'}>
-                    Boost your conversion rate
+                    nome do produto
                 </Heading>
                 <Text color={'gray.500'}>
-                    Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam
-                    nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam
-                    erat, sed diam voluptua. At vero eos et accusam et justo duo dolores
-                    et ea rebum.
+                    descricao
                 </Text>
                 </Stack>
                 <Stack mt={6} direction={'row'} spacing={4} align={'center'}>
@@ -65,8 +67,8 @@ const Product = () => {
                     alt={'Author'}
                 />
                 <Stack direction={'column'} spacing={0} fontSize={'sm'}>
-                    <Text fontWeight={600}>Achim Rolle</Text>
-                    <Text color={'gray.500'}>Feb 08, 2021 · 6min read</Text>
+                    <Text fontWeight={600}>nome vendedor</Text>
+                    <Text color={'gray.500'}>quantidade disponivel</Text>
                 </Stack>
                 </Stack>
             </Box>
@@ -76,4 +78,4 @@ const Product = () => {
     );
 };
 
-export default Product;
+export default CardDescription;
