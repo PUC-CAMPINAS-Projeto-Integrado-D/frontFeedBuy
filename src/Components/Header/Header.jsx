@@ -20,7 +20,7 @@ import {
   ChevronDownIcon,
   ChevronRightIcon,
 } from '@chakra-ui/icons';
-
+import { Input } from '@chakra-ui/react'
 import '../../Navegation/Navegation';
 import {Link as LinkNav} from 'react-router-dom';
 
@@ -67,6 +67,8 @@ const autentication = JSON.parse(localStorage.getItem('autentication'))?.data?.d
           </Flex>
 
         </Flex>
+
+        <Input placeholder='Pesquise aqui' size='md' left='-600px' width='800px' display='inline-block'/>
 
         <Stack
           flex={{ base: 1, md: 0 }}
