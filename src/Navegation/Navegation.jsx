@@ -8,7 +8,6 @@ import CadastroProduto from '../Pages/CadastroProduto';
 import Feed from '../Pages/Feed';
 import Login from '../Pages/Login';
 import Pay from '../Pages/Pay';
-import Perfil from '../Pages/Perfil';
 
 const Navegation = () => {
 
@@ -47,12 +46,6 @@ const Navegation = () => {
                     exact={true}
                     path='/Login'
                     element = {<Login/>}
-                />
-
-                <Route
-                    exact={true}
-                    path='/Perfil'
-                    element = {<Perfil/>}
                 />
 
                 <Route
