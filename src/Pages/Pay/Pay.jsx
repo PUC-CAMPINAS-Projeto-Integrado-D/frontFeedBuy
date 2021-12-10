@@ -1,13 +1,13 @@
-import { 
-  Box, 
-  Button, 
+import {
+  Box,
+  Button,
   Checkbox,
-  Divider, 
-  FormControl, 
-  FormLabel, 
-  Input, 
-  Center, 
-  InputGroup, 
+  Divider,
+  FormControl,
+  FormLabel,
+  Input,
+  Center,
+  InputGroup,
   InputLeftElement,
   useColorModeValue, } from "@chakra-ui/react";
 
@@ -36,7 +36,7 @@ const Pay = () => {
     const [DataC, setDataC] = useState('');
     const [CVC, setCVC] = useState('');
 
-    //const link = (sessionStorage.getItem('ip') ?? 'http://localhost:3001')+'/v1/public/register';
+    const link = (sessionStorage.getItem('ip') ?? 'http://localhost:3001')+'/v1/public/register';
     const toast = useToast();
     const clicked = async ()=>{
         try{
@@ -52,7 +52,7 @@ const Pay = () => {
                     //     },
 
                     // ],
-                
+
                     Nome,
                     CEP,
                     Num,
@@ -87,19 +87,19 @@ const Pay = () => {
 
     const priceCart = localStorage.getItem(cart.price)
     return(
-      
+
       <Fragment>
           <Header/>
 
           <Center height='620px'>
 
             <div className='produtos'>
-            
+
               <div className='produtos-individuais'>
                 {cart.map((item)=>{
-                    return <CardProduct 
-                        name={item.description} 
-                        imageURL={item.imageURL} 
+                    return <CardProduct
+                        name={item.description}
+                        imageURL={item.imageURL}
                         price={item.price}
                       />;
                 })}
@@ -112,8 +112,8 @@ const Pay = () => {
             <div className='pagamento'>
 
               <div className='botoespay'>
-                <Button 
-                  bg={useColorModeValue('white', 'gray.700')} 
+                <Button
+                  bg={useColorModeValue('white', 'gray.700')}
                   leftIcon={<SiGooglepay size='40px'/>}
                   width='250px'
                   _hover={{
@@ -121,8 +121,8 @@ const Pay = () => {
                     boxShadow: 'xl',
                     }}
                 />
-                <Button 
-                  bg={useColorModeValue('white', 'gray.700')} 
+                <Button
+                  bg={useColorModeValue('white', 'gray.700')}
                   leftIcon={<FaApplePay size='40px'/>}
                   width='250px'
                   _hover={{
@@ -166,7 +166,7 @@ const Pay = () => {
                     <Input type='number' placeholder='1234 1234 1234 1234' isRequired
                       value={Cartao} onInput={e => setCartao(e.target.value)}/>
                   </InputGroup>
-                 
+
                   <Input type='number' placeholder='MM/AA' isRequired
                     value={DataC} onInput={e => setDataC(e.target.value)}/>
                   <Input type='number' placeholder='CVC' isRequired
@@ -178,7 +178,7 @@ const Pay = () => {
               <Checkbox>Salvar dados para futura compra</Checkbox>
               <br></br>
               <br></br>
-              <Button 
+              <Button
                 width='500px'
                 bgGradient="linear(to-r, red.400,pink.400)"
                 color={'white'}
