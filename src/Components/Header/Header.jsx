@@ -25,8 +25,8 @@ import '../../Navegation/Navegation';
 import {Link as LinkNav} from 'react-router-dom';
 
 export default function Header() {
-  const { isOpen, onToggle } = useDisclosure();
-
+const { isOpen, onToggle } = useDisclosure();
+const autentication = JSON.parse(localStorage.getItem('autentication'))?.data?.data;
   return (
     <Box>
       <Flex
@@ -73,8 +73,8 @@ export default function Header() {
           justify={'flex-end'}
           direction={'row'}
           spacing={6}>
+          {autentication== null && <LinkNav to="/Login">
 
-          <LinkNav to="/Login">
             <Button
               as={'a'}
               fontSize={'sm'}
@@ -83,9 +83,10 @@ export default function Header() {
               >
               Entrar
             </Button>
-          </LinkNav>
+          </LinkNav>}
 
-          <LinkNav to="/Cadastro">
+
+          {autentication==null &&<LinkNav to="/Cadastro">
             <Button
               display={{ base: 'none', md: 'inline-flex' }}
               fontSize={'sm'}
@@ -97,7 +98,21 @@ export default function Header() {
               }}>
               Cadastrar
             </Button>
-          </LinkNav>
+          </LinkNav>}
+
+          {autentication!=null &&
+            <Button
+              onClick={() => {
+                localStorage.setItem('autentication', null);
+                window.location.reload();
+              }}
+              display={{ base: 'none', md: 'inline-flex' }}
+              fontSize={'sm'}
+              fontWeight={400}
+              >
+              Sair
+            </Button>
+          }
 
         </Stack>
       </Flex>
@@ -261,12 +276,19 @@ interface NavItem {
 }
 
 const NAV_ITEMS: Array<NavItem> = [
-  {
-    label: 'Favoritos',
-    href: '#',
-  },
+
   {
     label: 'Meu carrinho',
     href: '/Buy',
   },
+
 ];
+
+const token = JSON.parse(localStorage.getItem('autentication'))?.data?.data?.user?.Cargo ?? null;
+console.log(token, 'token');
+if(token!=null && token!=undefined && token==='ANUNCIANTE')
+NAV_ITEMS.push(
+  {
+    label: 'Cadastrar Produto',
+    href: '/CadastroProduto',
+  });

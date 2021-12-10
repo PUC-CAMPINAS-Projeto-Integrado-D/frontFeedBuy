@@ -5,7 +5,7 @@ import { ChakraProvider } from '@chakra-ui/react'; // Precisa do ChakraProvider
 // import Buy from '../src/Pages/Buy/Buy';
 // import Perfil from '../src/Pages/Perfil/Perfil';
 // import CadastroProduto from '../src/Pages/CadastroProduto/CadastroProduto';
-//import Feed from './Pages/Feed/Feed';
+// import Feed from './Pages/Feed/Feed';
 // import Pay from '../src/Pages/Pay/Pay'
 // import CardProduct from '../src/Components/CardProduct/CardProduct:';
 // import ViewProduct from '../src/Pages/ViewProduct/ViewProduct';

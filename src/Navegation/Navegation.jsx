@@ -7,8 +7,8 @@ import Cadastro from '../Pages/Cadastro';
 import CadastroProduto from '../Pages/CadastroProduto';
 import Feed from '../Pages/Feed';
 import Login from '../Pages/Login';
+import Pay from '../Pages/Pay';
 import Perfil from '../Pages/Perfil';
-import ViewProduct from '../Pages/ViewProduct/ViewProduct';
 
 const Navegation = () => {
 
@@ -57,8 +57,8 @@ const Navegation = () => {
 
                 <Route
                     exact={true}
-                    path='/ViewProduct'
-                    element = {<ViewProduct/>}
+                    path='/Pay'
+                    element = {<Pay/>}
                 />
 
                 </Routes>
