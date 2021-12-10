@@ -259,7 +259,7 @@ const NAV_ITEMS = [
 
   {
     label: 'Meu carrinho',
-    href: '/Buy',
+    href: '/Pay',
   },
 
 ];
