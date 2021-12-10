@@ -15,7 +15,7 @@ function useForceUpdate(){
 }
 
 const Feed = () => {
-    const link = 'http://localhost:3001/v1/public/ad';
+    const link = (sessionStorage.getItem('ip') ?? 'http://localhost:3001')+'/v1/public/ad';
     const forceUpdate = useForceUpdate();
     const [data, updateData] = useState([]);
 
@@ -55,7 +55,7 @@ const Feed = () => {
                         }
                     }).map((value)=>{
                         console.log(value);
-                        return <CardProduct name={value.Descricao} description={value.Obs} imageURL={'http://localhost:3001/v1/public/media/'+value.ID} price={value.Preco} ID={value.ID}/>;
+                        return <CardProduct name={value.Descricao} description={value.Obs} imageURL={(sessionStorage.getItem('ip') ?? 'http://localhost:3001')+'/v1/public/media/'+value.ID} price={value.Preco} ID={value.ID}/>;
                     })}
                     {
                         data.filter((value)=>{

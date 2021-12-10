@@ -25,7 +25,7 @@ const Login = () => {
     const [Usuario, setUsuario] = useState('');
     const [Senha, setSenha] = useState('');
 
-    const link = 'http://localhost:3001/v1/public/login';
+    const link = (sessionStorage.getItem('ip') ?? 'http://localhost:3001')+'/v1/public/login';
     const toast = useToast();
     const clicked = async ()=>{
         try{

@@ -34,7 +34,7 @@ const Pay = () => {
     const [DataC, setDataC] = useState('');
     const [CVC, setCVC] = useState('');
 
-    //const link = 'http://localhost:3001/v1/public/register';
+    //const link = (sessionStorage.getItem('ip') ?? 'http://localhost:3001')+'/v1/public/register';
     const toast = useToast();
     const clicked = async ()=>{
         try{

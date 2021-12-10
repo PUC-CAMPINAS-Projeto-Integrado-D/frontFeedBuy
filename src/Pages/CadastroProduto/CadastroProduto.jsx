@@ -32,8 +32,8 @@ const CadastroProduto = () => {
     const [Descricao, setDescricao] = useState('');
     const [SRC, setSRC] = useState('');
 
-    const link = 'http://localhost:3001/v1/private/ad';
-    const link_upload = 'http://localhost:3001/v1/private/media';
+    const link = (sessionStorage.getItem('ip') ?? 'http://localhost:3001')+'/v1/private/ad';
+    const link_upload = (sessionStorage.getItem('ip') ?? 'http://localhost:3001')+'/v1/private/media';
     const token = JSON.parse(localStorage.getItem('autentication')).data.data.token;
     const toast = useToast();
     const clicked = async ()=>{

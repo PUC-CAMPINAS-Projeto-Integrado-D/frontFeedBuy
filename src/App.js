@@ -10,11 +10,29 @@ import { ChakraProvider } from '@chakra-ui/react'; // Precisa do ChakraProvider
 // import CardProduct from '../src/Components/CardProduct/CardProduct:';
 // import ViewProduct from '../src/Pages/ViewProduct/ViewProduct';
 // import MetaTags from 'react-meta-tags';
+import { useState, updateState, useCallback, useEffect } from 'react';
+import { axiosGet } from './Service/service';
 
 import Navegation from "./Navegation/Navegation";
+var global_ip = null;
+
 
 
 function App() {
+    const [, updateState] = useState();
+    const forceUpdate = useCallback(() => updateState({}), []);
+
+    useEffect(()=>{
+        async function getIP() {
+            const result = await axiosGet('https://web.levande.com.br/ip.json');
+            const session = sessionStorage.getItem('ip');
+            if(session == null || session == undefined){
+                sessionStorage.setItem('ip', result.data.ip);
+                window.location.reload();
+            }
+        }
+        getIP();
+    }, []);
     // Precisa do ChakraProvider
     return (
           <ChakraProvider>
@@ -24,6 +42,3 @@ function App() {
 }
 
 export default App;
-
-
-

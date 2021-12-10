@@ -67,7 +67,11 @@ import {
             spacing={8}>
             <Stack spacing={6}>
               <Box>
-                <Image src={logo}/>
+                <Image onClick={()=>{
+                    sessionStorage.removeItem('ip');
+                    window.location.reload();
+                }}
+                src={logo}/>
               </Box>
               <Text fontSize={'sm'}>
                 © 2021 FeedBuy. All rights reserved
