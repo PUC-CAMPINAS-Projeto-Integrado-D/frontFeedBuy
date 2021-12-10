@@ -18,18 +18,22 @@ import {
   } from '@chakra-ui/react';
 import { SmallCloseIcon } from '@chakra-ui/icons';
 import { useToast } from '@chakra-ui/react'
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { axiosPost } from '../../Service/service';
 import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
+const axios = require('axios').default;
 
 const CadastroProduto = () => {
+    const inputFile = useRef(null);
 
     const [Marca, setMarca] = useState('');
     const [Preco, setPreco] = useState('');
     const [Descricao, setDescricao] = useState('');
+    const [SRC, setSRC] = useState('');
 
     const link = 'http://localhost:3001/v1/private/ad';
+    const link_upload = 'http://localhost:3001/v1/private/media';
     const token = JSON.parse(localStorage.getItem('autentication')).data.data.token;
     const toast = useToast();
     const clicked = async ()=>{
@@ -43,23 +47,45 @@ const CadastroProduto = () => {
                 }
                 , token
             );
+            var formData = new FormData();
+            formData.append("media", inputFile.current.files[0]);
+            formData.append("ID", resposta.data.data.ID);
+            const requestBack = ()=>{
+                return new Promise((resolve, reject)=>{
+                    axios.put(link_upload, formData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data',
+                            'Authorization': `Bearer ${token}`
+                        }
+                    })
+                    .then(function (response) {
+                        resolve(response)
+                    })
+                    .catch(function (error) {
+                        reject(error);
+                    });
+                });
+            }
+            await requestBack();
             toast({
-          title: 'Produto Adicionado!!!',
-          status: 'success',
-          position: 'top-left',
-          duration: 9000,
-          isClosable: true,
-        })
-            localStorage.getItem('autentication');
+                title: 'Produto Adicionado!!!',
+                status: 'success',
+                position: 'top-left',
+                duration: 9000,
+                isClosable: true,
+            });
+            setTimeout(()=>{
+                window.location.href = '../';
+            }, 900);
         }catch(ex){
-          toast({
-            title: 'Erro',
-            description: "Verifique se as informações foram digitadas certas",
-            position: 'top-left',
-            status: 'error',
-            duration: 9000,
-            isClosable: true,
-          });
+            toast({
+                title: 'Erro',
+                description: "Verifique se as informações foram digitadas certas",
+                position: 'top-left',
+                status: 'error',
+                duration: 9000,
+                isClosable: true,
+            });
         }
     }
 
@@ -67,7 +93,11 @@ const CadastroProduto = () => {
         <ChakraProvider>
 
           <Header/>
-
+          <input type='file' id='file' ref={inputFile} onChange={()=>{
+              console.log(inputFile);
+              const imgUrl = URL.createObjectURL(inputFile.current.files[0]);
+              setSRC(imgUrl);
+          }} style={{display: 'none'}}/>
           <Flex
             minH={'10vh'}
             align={'center'}
@@ -89,11 +119,14 @@ const CadastroProduto = () => {
                 <FormLabel>Foto Produto</FormLabel>
                 <Stack direction={['column', 'row']} spacing={6}>
                   <Center>
-                    <Avatar size="xl" src="">
+                    <Avatar size="xl" src={SRC}>
                     </Avatar>
                   </Center>
                   <Center w="full">
-                    <Button w="full">Mudar Foto</Button>
+                    <Button w="full"
+                    onClick={()=>{
+                        inputFile.current.click();
+                    }}>Mudar Foto</Button>
                   </Center>
                 </Stack>
               </FormControl>

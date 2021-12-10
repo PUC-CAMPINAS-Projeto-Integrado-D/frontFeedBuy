@@ -103,7 +103,7 @@ const CardProduct = ({
         )}
 
         <Image
-          src={ImgIphone}
+          src={imageURL}
           alt={`Picture of ${data.name}`}
           roundedTop="sm"
         />
