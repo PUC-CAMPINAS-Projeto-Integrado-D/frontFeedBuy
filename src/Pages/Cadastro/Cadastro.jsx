@@ -20,6 +20,7 @@ import {
 import { useToast } from '@chakra-ui/react'
 import { useState } from 'react';
 import { ViewIcon, ViewOffIcon } from '@chakra-ui/icons';
+import InputMask from "react-input-mask";
 import { axiosPost } from '../../Service/service';
 import Header from '../../Components/Header';
 import Footer from '../../Components/Footer';
@@ -124,7 +125,8 @@ const Cadastro = () => {
             <Box>
                 <FormControl id="telefone" isRequired>
                     <FormLabel>Telefone</FormLabel>
-                    <Input value={Fone} onInput={e => setFone(e.target.value)} type="tel"/>
+                    <Input value={Fone} onInput={e => setFone(e.target.value)} type="tel"
+                    as={InputMask} mask="(99)99999-9999" maskChar={null}/>
                 </FormControl>
             </Box>
 

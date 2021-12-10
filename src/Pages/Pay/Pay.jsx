@@ -9,86 +9,88 @@ import {
   Center,
   InputGroup,
   InputLeftElement,
-  useColorModeValue, } from "@chakra-ui/react";
+  useColorModeValue } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
+import {
+    Alert,
+    AlertIcon,
+    AlertTitle,
+    AlertDescription,
+  } from '@chakra-ui/react'
 
 import React, {Fragment, useState} from "react";
-import { axiosPost } from '../../Service/service';
-import { useToast } from '@chakra-ui/react'
+import InputMask from "react-input-mask";
 
-import Footer from "../../Components/Footer";
-import Header from "../../Components/Header";
 import {GoCreditCard} from 'react-icons/go';
 import {VscAccount} from 'react-icons/vsc'
 import {TiSortNumerically} from 'react-icons/ti'
 import {SiGooglepay} from 'react-icons/si';
 import {FaApplePay} from 'react-icons/fa';
 
+import Footer from "../../Components/Footer";
+import Header from "../../Components/Header";
 import CardProduct from '../../Components/CardProduct';
 
 import './Pay.css';
 
 const Pay = () => {
 
-    const [Nome, setNome] = useState('');
-    const [CEP, setCEP] = useState('');
-    const [Num, setNum] = useState('');
-    const [Cartao, setCartao] = useState('');
-    const [DataC, setDataC] = useState('');
-    const [CVC, setCVC] = useState('');
-
-    const link = (sessionStorage.getItem('ip') ?? 'http://localhost:3001')+'/v1/public/register';
-    const toast = useToast();
-    const clicked = async ()=>{
-        try{
-            const resposta = await axiosPost(
-                link, // Colocar o link aqui
-                {
-                    "Endereco": CEP,
-                    // "Itens": [
-                    //     {
-                    //         "Anuncio": ID,
-                    //         "Valor": Preco,
-                    //         "Quantidade": ''
-                    //     },
-
-                    // ],
-
-                    Nome,
-                    CEP,
-                    Num,
-                    Cartao,
-                    DataC,
-                    CVC
-                },
-                JSON.parse(localStorage.getItem('autentication')).data.data.token
-            );
-            toast({
-          title: 'Pedido feito com sucesso! Obrigada!',
-          status: 'success',
-          position: 'top-left',
-          duration: 9000,
-          isClosable: true,
-        })
-            localStorage.getItem('autentication', JSON.stringify(resposta));
-        }catch(ex){
-            toast({
-              title: 'Dados inválidos',
-              description: "Verifique se as informações foram digitadas certas",
-              position: 'top-left',
-              status: 'error',
-              duration: 9000,
-              isClosable: true,
-            });
-        }
+    const clicked = () => {
+      if ((document.getElementById('name').value.length < 3) ||
+          (document.getElementById('cep').value.length < 3) ||
+          (document.getElementById('num').value.length == 0) ||
+          (document.getElementById('cartao').value.length < 3) ||
+          (document.getElementById('dataC').value.length < 3) ||
+          (document.getElementById('cvc').value.length < 2))
+        {
+        return <ChakraProvider>
+            <Alert
+              status='error'
+              variant='subtle'
+              flexDirection='column'
+              alignItems='center'
+              justifyContent='center'
+              textAlign='center'
+              height='200px'
+            >
+              <AlertIcon boxSize='40px' mr={0} />
+              <AlertTitle mt={4} mb={1} fontSize='lg'>
+                Dados não preenchidos corretamente!
+              </AlertTitle>
+              <AlertDescription maxWidth='sm'>
+                Por favor revise os campos e empreencha novamente
+              </AlertDescription>
+            </Alert>
+          </ChakraProvider>
+      } else {
+        return <ChakraProvider>
+            <Alert
+              status='success'
+              variant='subtle'
+              flexDirection='column'
+              alignItems='center'
+              justifyContent='center'
+              textAlign='center'
+              height='200px'
+            >
+              <AlertIcon boxSize='40px' mr={0} />
+              <AlertTitle mt={4} mb={1} fontSize='lg'>
+                Compra realizada com sucesso!
+              </AlertTitle>
+              <AlertDescription maxWidth='sm'>
+                Obrigada por comprar conosco! Você receberá em seu email a confirmação do pedido
+              </AlertDescription>
+            </Alert>
+          </ChakraProvider>
+      }
     }
 
     const cartS = localStorage.getItem('cart') ?? '[]';
     const cart = JSON.parse(cartS);
 
-    const priceCart = localStorage.getItem(cart.price)
     return(
 
-      <Fragment>
+      <ChakraProvider>
           <Header/>
 
           <Center height='620px'>
@@ -96,13 +98,14 @@ const Pay = () => {
             <div className='produtos'>
 
               <div className='produtos-individuais'>
+                <br></br>
                 {cart.map((item)=>{
                     return <CardProduct
                         name={item.description}
                         imageURL={item.imageURL}
                         price={item.price}
                       />;
-                })}
+                } ) }
               </div>
 
             </div>
@@ -142,16 +145,17 @@ const Pay = () => {
                   <InputGroup>
                     <InputLeftElement children={<VscAccount/>}/>
                     <Input type='text' placeholder='Nome do Destinatario'
-                      value={Nome} onInput={ e =>  setNome(e.target.value)}/>
+                      id='name'
+                      />
                   </InputGroup>
 
-                  <Input type='text' placeholder= 'CEP' value={CEP}
-                    onInput={ e => setCEP(e.target.value)}/>
+                  <Input type='text' placeholder= 'CEP' id='cep'
+                    as={InputMask} mask="99999-999" maskChar={null}/>
 
                   <InputGroup>
                     <InputLeftElement children={<TiSortNumerically/>}/>
-                    <Input type='number' placeholder='Nº' value={Num}
-                      onInput= {e => setNum(e.target.value)}/>
+                    <Input type='text' placeholder='Nº' id='num'
+                      as={InputMask} mask="9999" maskChar={null}/>
                   </InputGroup>
                 </FormControl>
               </Box>
@@ -163,14 +167,14 @@ const Pay = () => {
                   <FormLabel>Dados do Cartão:</FormLabel>
                   <InputGroup>
                     <InputLeftElement children={<GoCreditCard/>}/>
-                    <Input type='number' placeholder='1234 1234 1234 1234' isRequired
-                      value={Cartao} onInput={e => setCartao(e.target.value)}/>
+                    <Input type='text' placeholder='1234 1234 1234 1234' isRequired
+                      id='cartao' as={InputMask} mask="9999 9999 9999 9999" maskChar={null} />
                   </InputGroup>
 
-                  <Input type='number' placeholder='MM/AA' isRequired
-                    value={DataC} onInput={e => setDataC(e.target.value)}/>
-                  <Input type='number' placeholder='CVC' isRequired
-                    value={CVC} onInput={e => setCVC(e.target.value)}/>
+                  <Input type='text' placeholder='MM/AA' isRequired
+                    id='dataC' as={InputMask} mask="99/99" maskChar={null}/>
+                  <Input type='text' placeholder='CVC' isRequired
+                    id='cvc' as={InputMask} mask="999" maskChar={null}/>
                 </FormControl>
               </Box>
               <br></br>
@@ -194,9 +198,12 @@ const Pay = () => {
 
           <Footer/>
 
-      </Fragment>
+      </ChakraProvider>
 
       );
 };
+
+
+
 
 export default Pay;

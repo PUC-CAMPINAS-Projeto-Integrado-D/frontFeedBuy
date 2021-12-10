@@ -85,7 +85,17 @@ const Buy = () => {
 
                         <br></br>
 
-                        <Button className='btnBuy' onClick={AddToCart} rightIcon={<BsBag/>} colorScheme="black" variant="outline"> COMPRAR AGORA </Button>
+                        <Button 
+                            width="400px"
+                            className='btnBuy' 
+                            onClick={AddToCart} 
+                            rightIcon={<BsBag/>} 
+                            bgGradient="linear(to-r, red.400,pink.400)"
+                            variant="outline"
+                            _hover={{
+                                bgGradient: 'linear(to-r, red.100,pink.200)',
+                                boxShadow: 'xl',
+                                }}> COMPRAR AGORA </Button>
 
                     </div>
 
