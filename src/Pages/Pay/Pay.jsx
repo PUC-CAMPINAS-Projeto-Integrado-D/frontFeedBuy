@@ -23,6 +23,8 @@ import {TiSortNumerically} from 'react-icons/ti'
 import {SiGooglepay} from 'react-icons/si';
 import {FaApplePay} from 'react-icons/fa';
 
+import CardProduct from '../../Components/CardProduct';
+
 import './Pay.css';
 
 const Pay = () => {
@@ -39,15 +41,26 @@ const Pay = () => {
     const clicked = async ()=>{
         try{
             const resposta = await axiosPost(
-                //link, // Colocar o link aqui
+                link, // Colocar o link aqui
                 {
+                    "Endereco": CEP,
+                    // "Itens": [
+                    //     {
+                    //         "Anuncio": ID,
+                    //         "Valor": Preco,
+                    //         "Quantidade": ''
+                    //     },
+
+                    // ],
+                
                     Nome,
                     CEP,
                     Num,
                     Cartao,
                     DataC,
                     CVC
-                }
+                },
+                JSON.parse(localStorage.getItem('autentication')).data.data.token
             );
             toast({
           title: 'Pedido feito com sucesso! Obrigada!',
@@ -69,6 +82,10 @@ const Pay = () => {
         }
     }
 
+    const cartS = localStorage.getItem('cart') ?? '[]';
+    const cart = JSON.parse(cartS);
+
+    const priceCart = localStorage.getItem(cart.price)
     return(
       
       <Fragment>
@@ -77,8 +94,16 @@ const Pay = () => {
           <Center height='620px'>
 
             <div className='produtos'>
-              
-              COLOCAR OS PRODUTOS DO CARRINHO AQUI  
+            
+              <div className='produtos-individuais'>
+                {cart.map((item)=>{
+                    return <CardProduct 
+                        name={item.description} 
+                        imageURL={item.imageURL} 
+                        price={item.price}
+                      />;
+                })}
+              </div>
 
             </div>
 
@@ -160,7 +185,6 @@ const Pay = () => {
                 _hover={{
                     bgGradient: 'linear(to-r, red.300,pink.400)',
                     boxShadow: 'xl',
-                
                 }}
                 onClick={clicked}>
                   Pagar

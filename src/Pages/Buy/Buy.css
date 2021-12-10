@@ -37,22 +37,15 @@
     margin-bottom: 10px;
 }
 
-.btnBuy{
-    width: 400px;
-}
 
 .btnQCF{
     margin-top: 10px;
 }
 
 .btnChat  {
-    border: none;
-    background-color: white;
     margin-left: 100px;
 }
 
 .btnFavorito  {
-    border: none;
-    background-color: white;
     margin-left: 60px;
 }
