@@ -11,13 +11,7 @@ import {
   InputLeftElement,
   useColorModeValue } from '@chakra-ui/react';
 import { ChakraProvider } from '@chakra-ui/react';
-import {
-    Alert,
-    AlertIcon,
-    AlertTitle,
-    AlertDescription,
-  } from '@chakra-ui/react'
-
+import { useToast } from '@chakra-ui/react'
 import React, {Fragment, useState} from "react";
 import InputMask from "react-input-mask";
 
@@ -35,6 +29,8 @@ import './Pay.css';
 
 const Pay = () => {
 
+    const toast = useToast();
+
     const clicked = () => {
       if ((document.getElementById('name').value.length < 3) ||
           (document.getElementById('cep').value.length < 3) ||
@@ -43,45 +39,27 @@ const Pay = () => {
           (document.getElementById('dataC').value.length < 3) ||
           (document.getElementById('cvc').value.length < 2))
         {
-        return <ChakraProvider>
-            <Alert
-              status='error'
-              variant='subtle'
-              flexDirection='column'
-              alignItems='center'
-              justifyContent='center'
-              textAlign='center'
-              height='200px'
-            >
-              <AlertIcon boxSize='40px' mr={0} />
-              <AlertTitle mt={4} mb={1} fontSize='lg'>
-                Dados não preenchidos corretamente!
-              </AlertTitle>
-              <AlertDescription maxWidth='sm'>
-                Por favor revise os campos e empreencha novamente
-              </AlertDescription>
-            </Alert>
-          </ChakraProvider>
+        return (
+          toast({
+            title: 'Dados inválidos',
+            description: "Verifique se as informações foram digitadas certas",
+            position: 'top-left',
+            status: 'error',
+            duration: 9000,
+            isClosable: true,
+          })
+        )
       } else {
-        return <ChakraProvider>
-            <Alert
-              status='success'
-              variant='subtle'
-              flexDirection='column'
-              alignItems='center'
-              justifyContent='center'
-              textAlign='center'
-              height='200px'
-            >
-              <AlertIcon boxSize='40px' mr={0} />
-              <AlertTitle mt={4} mb={1} fontSize='lg'>
-                Compra realizada com sucesso!
-              </AlertTitle>
-              <AlertDescription maxWidth='sm'>
-                Obrigada por comprar conosco! Você receberá em seu email a confirmação do pedido
-              </AlertDescription>
-            </Alert>
-          </ChakraProvider>
+        return (toast({
+          title: 'Compra realizada com sucesso!',
+          description: "Obrigada pela compra! Voce recebera um email de confirmação!",
+          position: 'top-left',
+          status: 'success',
+          duration: 9000,
+          isClosable: true,
+        }))
+
+        
       }
     }
 
