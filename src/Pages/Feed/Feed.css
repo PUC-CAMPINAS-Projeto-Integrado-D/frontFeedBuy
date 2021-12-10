@@ -6,3 +6,11 @@
     align-content: flex-start;
     flex-grow: 4;
 }
+
+.no-product{
+    width: 100%;
+    padding-top: 25vh;
+    padding-bottom: 25vh;
+    font-weight: 10;
+    font-size: 45px;
+}

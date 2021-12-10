@@ -24,7 +24,9 @@ import { Input } from '@chakra-ui/react'
 import '../../Navegation/Navegation';
 import {Link as LinkNav} from 'react-router-dom';
 
-export default function Header() {
+export default function Header({
+    onChangeInput = null
+}) {
 const { isOpen, onToggle } = useDisclosure();
 const autentication = JSON.parse(localStorage.getItem('autentication'))?.data?.data;
   return (
@@ -57,7 +59,7 @@ const autentication = JSON.parse(localStorage.getItem('autentication'))?.data?.d
           <Flex display={{base: 'none', md: 'flex'}} ml={0}>
 
             <LinkNav to='/Feed'>
-              <Button variant="ghost">feedbuy</Button>
+              <Button variant="light">FeedBuy</Button>
             </LinkNav>
 
           </Flex>
@@ -67,9 +69,17 @@ const autentication = JSON.parse(localStorage.getItem('autentication'))?.data?.d
           </Flex>
 
         </Flex>
-
-        <Input placeholder='Pesquise aqui' size='md' left='-600px' width='800px' display='inline-block'/>
-
+        <Flex display={{base: 'none', md: 'flex'}} mr={30}>
+            <Input placeholder='Pesquise aqui'
+             onInput={(evt)=>{
+                 sessionStorage.setItem('search', evt.target.value);
+                 if(onChangeInput != null){
+                    onChangeInput();
+                 }
+             }}
+             value={sessionStorage.getItem('search')}
+             size='md' width="100%" display='inline-block'/>
+        </Flex>
         <Stack
           flex={{ base: 1, md: 0 }}
           justify={'flex-end'}
@@ -78,10 +88,9 @@ const autentication = JSON.parse(localStorage.getItem('autentication'))?.data?.d
           {autentication== null && <LinkNav to="/Login">
 
             <Button
-              as={'a'}
-              fontSize={'sm'}
-              fontWeight={400}
-              variant={'link'}
+            display={{ base: 'none', md: 'inline-flex' }}
+            fontSize={'sm'}
+            fontWeight={600}
               >
               Entrar
             </Button>
@@ -110,7 +119,7 @@ const autentication = JSON.parse(localStorage.getItem('autentication'))?.data?.d
               }}
               display={{ base: 'none', md: 'inline-flex' }}
               fontSize={'sm'}
-              fontWeight={400}
+              fontWeight={600}
               >
               Sair
             </Button>
@@ -127,53 +136,22 @@ const autentication = JSON.parse(localStorage.getItem('autentication'))?.data?.d
 }
 
 const DesktopNav = () => {
-  const linkColor = useColorModeValue('gray.600', 'gray.200');
-  const linkHoverColor = useColorModeValue('gray.800', 'white');
-  const popoverContentBgColor = useColorModeValue('white', 'gray.800');
+    const linkColor = useColorModeValue('gray.600', 'gray.200');
+    const linkHoverColor = useColorModeValue('gray.800', 'white');
+    const popoverContentBgColor = useColorModeValue('white', 'gray.800');
 
-  return (
-    <Stack direction={'row'} spacing={4}>
-      {NAV_ITEMS.map((navItem) => (
-        <Box key={navItem.label}>
-          <Popover trigger={'hover'} placement={'bottom-start'}>
-            <PopoverTrigger>
-              <Link
-                p={2}
-                href={navItem.href ?? '#'}
-                fontSize={'sm'}
-                fontWeight={500}
-                color={linkColor}
-                _hover={{
-                  textDecoration: 'none',
-                  color: linkHoverColor,
-                }}>
-                {navItem.label}
-              </Link>
-            </PopoverTrigger>
-
-            {navItem.children && (
-              <PopoverContent
-                border={0}
-                boxShadow={'xl'}
-                bg={popoverContentBgColor}
-                p={4}
-                rounded={'xl'}
-                minW={'sm'}>
-                <Stack>
-                  {navItem.children.map((child) => (
-                    <DesktopSubNav key={child.label} {...child} />
-                  ))}
-                </Stack>
-              </PopoverContent>
-            )}
-          </Popover>
-        </Box>
-      ))}
-    </Stack>
-  );
+    return (
+        NAV_ITEMS.map(
+            (navItem) => (
+                <LinkNav to={navItem.href}>
+                <Button display={{ fontWeight: 'none'}} variant="light" bold="none">{navItem.label}</Button>
+                </LinkNav>
+            )
+        )
+    )
 };
 
-const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
+const DesktopSubNav = ({ label, href, subLabel }) => {
   return (
     <Link
       href={href}
@@ -277,7 +255,7 @@ interface NavItem {
   href?: string;
 }
 
-const NAV_ITEMS: Array<NavItem> = [
+const NAV_ITEMS = [
 
   {
     label: 'Meu carrinho',
