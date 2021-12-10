@@ -22,7 +22,12 @@ import './Buy.css';
 
 const Buy = () => {
     const toast = useToast();
-    const thisProduct = JSON.parse(sessionStorage.getItem('buy'));
+    let thisProduct = sessionStorage.getItem('buy');
+    if(thisProduct=== null || thisProduct === undefined){
+        window.location.href = "./";
+        return;
+    }
+    thisProduct = JSON.parse(sessionStorage.getItem('buy'));
     const ImgIphone = thisProduct.imageURL;
 
     function AddToCart(){

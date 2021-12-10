@@ -24,6 +24,8 @@ const Feed = () => {
             try{
                 const resposta = await axiosGet(link);
                 updateData(resposta.data.data);
+                sessionStorage.setItem('search', '');
+                forceUpdate();
             }catch(ex){
                 console.error(ex);
             }
@@ -57,8 +59,10 @@ const Feed = () => {
                     })}
                     {
                         data.filter((value)=>{
+                            const session = sessionStorage.getItem('search');
+                            if(session == null || session == undefined) return true;
                             const txtValue = JSON.stringify(value);
-                            const searched = new RegExp(sessionStorage.getItem('search'), 'gi');
+                            const searched = new RegExp(session, 'gi');
                             if(searched != null && searched != ""){
                                 return txtValue.match(searched) != null;
                             }else{
